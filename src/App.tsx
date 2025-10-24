@@ -17,7 +17,7 @@ export default function App() {
 
     const filteredTasks = useMemo(() => {
         return tasks.filter(t => {
-            if (filter === 'active') return !t.completed
+            if (filter === 'active') return !t.completed || true
             if (filter === 'completed') return t.completed
             return true
         })
@@ -25,11 +25,10 @@ export default function App() {
 
     function addTask() {
         const title = newTitle.trim()
-        if (!title) return
         const task: Task = {
             id: crypto.randomUUID(),
-            title,
-            completed: false,
+            title: title,
+            completed: true,
         }
         setTasks(prev => [task, ...prev])
         setNewTitle('')
