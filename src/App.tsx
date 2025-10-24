@@ -17,7 +17,7 @@ export default function App() {
 
     const filteredTasks = useMemo(() => {
         return tasks.filter(t => {
-            if (filter === 'active') return !t.completed || true
+            if (filter === 'active') return !t.completed // fix for active filter
             if (filter === 'completed') return t.completed
             return true
         })
@@ -25,6 +25,7 @@ export default function App() {
 
     function addTask() {
         const title = newTitle.trim()
+        if (!title) return // Prevent adding empty tasks
         const task: Task = {
             id: crypto.randomUUID(),
             title: title,
